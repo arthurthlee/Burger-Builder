@@ -61,6 +61,7 @@ class ContactData extends Component {
             },
             loading: false
         }
+    }
 
     orderHandler = (event) => {
             event.preventDefault();
@@ -86,7 +87,7 @@ class ContactData extends Component {
     render() {
             let form = (
                 <form>
-                    <Input inputType="input" type="text" name="name" placeholder="Your name" />
+                    <Input elementType="..." elementConfig="..." value="..."/>
                     <Input inputType="input" type="email" name="email" placeholder="Your Mail" />
                     <Input inputType="input" type="text" name="street" placeholder="Street" />
                     <Input inputType="input" type="text" name="postal" placeholder="Postal Code" />
