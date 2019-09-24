@@ -23,7 +23,7 @@ class Checkout extends Component {
             }
 
         }
-        this.setState({ingredients: ingredients, totalState: price})
+        this.setState({ingredients: ingredients, totalPrice: price})
     }
 
     checkoutCancelledHandler = () => {

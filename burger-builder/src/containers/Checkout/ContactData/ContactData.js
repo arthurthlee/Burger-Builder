@@ -22,7 +22,7 @@ class ContactData extends Component {
         // Calculate price on server to prevent users from changing it in their browser
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.totalPrice,
+            price: this.props.price,
             customer: {
                 name: 'Arthur Lee',
                 address: {
