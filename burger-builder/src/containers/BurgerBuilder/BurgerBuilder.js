@@ -10,6 +10,7 @@ import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as burgerBuilderActions from '../../store/actions/index';
+import axios from '../../axios-orders';
 
 
 class BurgerBuilder extends Component {
@@ -20,8 +21,7 @@ class BurgerBuilder extends Component {
 
     state = {
         purchasing: false,
-        loading: false,
-        error: false
+
     }
 
     componentDidMount() {
@@ -88,9 +88,6 @@ class BurgerBuilder extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler}
                 price={this.props.price} />;
-        }
-        if (this.state.loading) {
-            orderSummary = <Spinner />
         }
 
         // {salad: true, meat: false, ...}
