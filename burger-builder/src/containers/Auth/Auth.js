@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -69,7 +70,7 @@ class Auth extends Component {
                 touched: true
             }
         };
-        this.setState({controls: updatedControls});
+        this.setState({ controls: updatedControls });
     }
 
     submitHandler = (event) => {
@@ -79,11 +80,11 @@ class Auth extends Component {
 
     switchAuthModeHandler = () => {
         this.setState(prevState => {
-            return {isSignup: !prevState.isSignup};
+            return { isSignup: !prevState.isSignup };
         })
     }
 
-    render () {
+    render() {
         const formElementsArray = [];
         for (let key in this.state.controls) {
             formElementsArray.push({
@@ -102,23 +103,29 @@ class Auth extends Component {
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                />
+            />
         ));
 
-            if (this.props.loading) {
-                form = <Spinner />
-            }
+        if (this.props.loading) {
+            form = <Spinner />
+        }
 
-            let errorMessage = null;
+        let errorMessage = null;
 
-            if (this.props.error) {
-                errorMessage = (
-                    <p>{this.props.error.message}</p>
-                );
-            }
+        if (this.props.error) {
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            );
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to="/" />;
+        }
 
         return (
             <div className={classes.Auth}>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -136,7 +143,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
