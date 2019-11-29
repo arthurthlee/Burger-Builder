@@ -20,10 +20,12 @@ const Auth = React.lazy(() => {
 });
 
 const App = props => {
+  const {onTryAutoSignup} = props;
 
+  // We want useEffect to rerun if onTryAutoSignup in our props changes
   useEffect(() => {
-    props.onTryAutoSignup();
-  }, []);
+    onTryAutoSignup();
+  }, [onTryAutoSignup]);
 
   let routes = (
     <Switch>
